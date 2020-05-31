@@ -1,0 +1,42 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Client {
+    id: Int!
+    name: String!
+    phone: String!
+    address: String!
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type Customer {
+    id: Int!
+    name: String!
+    email: String!
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+    clientId: Int!
+    client: Client!
+}
+
+type Entry {
+    id: Int!
+    type: String!
+    transactionReference: String!
+    description: String!
+    amount: Float!
+    runningBalance: Float!
+    insertedAt: DateTime!
+}
+
+
+type Query {
+    clients: [Client!]!
+    customers: [Customer!]!
+    entries: [Entry!]!
+}
+
+scalar DateTime
+
