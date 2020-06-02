@@ -17,7 +17,30 @@ type Customer {
     email: String!
     insertedAt: DateTime!
     updatedAt: DateTime!
-    clientId: Int!
+    client: Client!
+}
+
+type BankAccount {
+    id: Int!
+    type: String!
+    description: String!
+    accountNumber: String!
+    name: String!
+    customer: Customer
+    CustomerId: Int
+    ClientId: Int
+    client: Client
+    teller: Teller
+    insertedAt: DateTime!
+    updatedAt: DateTime!
+}
+
+type Teller {
+    id: Int!
+    name: String!
+    email: String!
+    insertedAt: DateTime!
+    updatedAt: DateTime!
     client: Client!
 }
 
@@ -27,15 +50,19 @@ type Entry {
     transactionReference: String!
     description: String!
     amount: Float!
+    account: BankAccount!
     runningBalance: Float!
     insertedAt: DateTime!
 }
 
 
 type Query {
-    clients: [Client!]!
-    customers: [Customer!]!
-    entries: [Entry!]!
+    clients: [Client]
+    customers: [Customer]
+    entries: [Entry]
+    tellers: [Teller]
+    BankAccounts: [BankAccount]
+
 }
 
 scalar DateTime

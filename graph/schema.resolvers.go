@@ -5,6 +5,7 @@ package graph
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/oryono/banking-go/graph/generated"
 	"github.com/oryono/banking-go/models"
@@ -24,8 +25,21 @@ func (r *queryResolver) Customers(ctx context.Context) ([]*models.Customer, erro
 
 func (r *queryResolver) Entries(ctx context.Context) ([]*models.Entry, error) {
 	var entries []*models.Entry
-	r.DB.Find(&entries)
+	r.DB.Preload("Account").Preload("Account.Customer").Preload("Account.Teller").Find(&entries)
 	return entries, nil
+}
+
+func (r *queryResolver) Tellers(ctx context.Context) ([]*models.Teller, error) {
+	var tellers []*models.Teller
+	r.DB.Find(&tellers)
+	return tellers, nil
+}
+
+func (r *queryResolver) BankAccounts(ctx context.Context) ([]*models.BankAccount, error) {
+	var bankAccounts []*models.BankAccount
+	r.DB.Preload("Customer.Client").Preload("Teller.Client").Preload("Client").Preload("Teller").Find(&bankAccounts)
+	fmt.Println(*bankAccounts[0])
+	return bankAccounts, nil
 }
 
 // Query returns generated.QueryResolver implementation.

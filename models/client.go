@@ -5,6 +5,7 @@ type Client struct {
 	Name string  `json:"name"`
 	Phone  string `json:"phone"`
 	Address string `json:"address"`
+	BankAccount *BankAccount `json:"bank_account" gorm:"ForeignKey:account_id"`
 	InsertedAt string `json:"inserted_at"`
 	UpdatedAt string `json:"updated_at"`
 }

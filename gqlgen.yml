@@ -52,6 +52,12 @@ models:
   Entry:
     model: github.com/oryono/banking-go/models.Entry
 
+  Teller:
+    model: github.com/oryono/banking-go/models.Teller
+
+  BankAccount:
+    model: github.com/oryono/banking-go/models.BankAccount
+
   ID:
     model:
       - github.com/99designs/gqlgen/graphql.ID
